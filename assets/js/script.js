@@ -67,14 +67,15 @@ let searchCityBtnHandler = function () {
                     var localStorageKey = searchCityInput.value;
                     if (localStorage.length >= 5) {
                         localStorage.removeItem(localStorage.key(0));
-                        document.getElementById("recentSearchCity").children[0].remove();
+                        document.getElementById("recentSearchCity").children[1].remove();
                         localStorage.setItem(localStorageKey, searchCityInput.value);
                         var setBtn = document.createElement("button");
+                        setBtn.setAttribute("id", "recentSearchCityBtn" + localStorageIndex);
                         setBtn.classList.add("recentSearchCity");
                         recentSearchCity.appendChild(setBtn);
                         setBtn.textContent = localStorage.getItem(localStorageKey);
                         console.log(localStorageIndex);
-                        localStorageIndex++;
+
 
                     }
 
@@ -83,14 +84,25 @@ let searchCityBtnHandler = function () {
                     if (localStorageIndex <= 4 && localStorage.getItem(localStorageKey) === null) {
                         localStorage.setItem(localStorageKey, searchCityInput.value);
                         var setBtn = document.createElement("button");
+                        setBtn.setAttribute("id", "setBtn" + localStorageIndex);
                         setBtn.classList.add("recentSearchCity");
                         recentSearchCity.appendChild(setBtn);
                         setBtn.textContent = localStorage.getItem(localStorageKey);
                         console.log(localStorageIndex);
                         localStorageIndex++;
 
+                        setBtn.addEventListener("click", function () {
+                            searchCityInput.value = this.innerText;
+                            searchCityBtnHandler();
+                        })
 
                     }
+
+
+
+
+
+
 
 
                     // day 1 Forecast Date
@@ -166,6 +178,8 @@ let searchCityBtnHandler = function () {
         })
 
 }
+
+
 
 
 searchCityBtn.addEventListener("click", searchCityBtnHandler);
