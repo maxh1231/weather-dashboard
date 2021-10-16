@@ -25,31 +25,35 @@ for (let i = 0; i < localStorage.length; i++) {
 
 
 
+var clearHistoryBtn = document.createElement("a");
+clearHistoryBtn.setAttribute("id", "clearHistoryBtn");
+clearHistoryBtn.textContent = "Clear History";
+recentSearchCity.appendChild(clearHistoryBtn);
+
+clearHistoryBtn.addEventListener("click", function () {
+    localStorage.clear();
+    window.location.href = "index.html";
+
+})
+
+
+
 // API Call on search button click
 let searchCityBtnHandler = function () {
 
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchCityInput.value}&limit=5&appid=16504850b1a264a95e1797ff5a4e056b`)
 
-
-
         .then(response => response.json())
-
-
-
         .then(function (data) {
             console.log(data);
             geoLat = data[0].lat;
             geoLon = data[0].lon;
             cityName = data[0].name;
 
-
-
-
-
             fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${geoLat}&lon=${geoLon}&units=imperial&exclude=&appid=16504850b1a264a95e1797ff5a4e056b`)
 
                 .then(response => response.json())
-
+                // Display weather data
                 .then(function (data) {
                     console.log(data);
                     document.getElementById("cityNameDate").textContent = cityName + " " + moment().format("(M/DD/YYYY)");
@@ -59,7 +63,23 @@ let searchCityBtnHandler = function () {
                     document.getElementById("cityUvIndex").textContent = "UV Index: " + data.current.uvi;
 
 
+
                     var localStorageKey = searchCityInput.value;
+                    if (localStorage.length >= 5) {
+                        localStorage.removeItem(localStorage.key(0));
+                        document.getElementById("recentSearchCity").children[0].remove();
+                        localStorage.setItem(localStorageKey, searchCityInput.value);
+                        var setBtn = document.createElement("button");
+                        setBtn.classList.add("recentSearchCity");
+                        recentSearchCity.appendChild(setBtn);
+                        setBtn.textContent = localStorage.getItem(localStorageKey);
+                        console.log(localStorageIndex);
+                        localStorageIndex++;
+
+                    }
+
+                    // save values to local storage
+
                     if (localStorageIndex <= 4 && localStorage.getItem(localStorageKey) === null) {
                         localStorage.setItem(localStorageKey, searchCityInput.value);
                         var setBtn = document.createElement("button");
@@ -68,12 +88,12 @@ let searchCityBtnHandler = function () {
                         setBtn.textContent = localStorage.getItem(localStorageKey);
                         console.log(localStorageIndex);
                         localStorageIndex++;
+
+
                     }
 
+
                 })
-
-
-
         })
 
         .catch(err => {
@@ -81,24 +101,8 @@ let searchCityBtnHandler = function () {
             document.getElementById("searchCityInput").value = "Must enter a valid city";
         })
 
-
-    // recentSearches();
 }
 
-// let recentSearches = function () {
-
-//     var localStorageKey = searchCityInput.value;
-//     if (localStorageIndex <= 4 && localStorage.getItem(localStorageKey) === null) {
-//         localStorage.setItem(localStorageKey, searchCityInput.value);
-//         var setBtn = document.createElement("button");
-//         setBtn.classList.add("recentSearchCity");
-//         recentSearchCity.appendChild(setBtn);
-//         setBtn.textContent = localStorage.getItem(localStorageKey);
-//         console.log(localStorageIndex);
-//         localStorageIndex++;
-//     }
-
-// }
 
 searchCityBtn.addEventListener("click", searchCityBtnHandler);
 

@@ -107,6 +107,18 @@ header {
     border-bottom: 2px solid #1D3557;
 }
 
+#clearHistoryBtn {
+    text-decoration: none;
+    color: #1D3557;
+    order: 9999;
+    text-align: center;
+}
+
+#clearHistoryBtn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 #hero2 {
     display: flex;
     flex-wrap: wrap;
