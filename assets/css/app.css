@@ -68,10 +68,10 @@ header {
     flex-direction: column;
     margin-top: 20px;
     height: 400px;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
-#recentSearchCity button {
+.recentSearchCity {
     background-color: #adb5bd;
     color: black;
     border: 1px solid #adb5bd;
@@ -79,9 +79,10 @@ header {
     font-size: 1.25rem;
     padding: 10px 15px;
     opacity: .9;
+    margin: 10px 0px;
 }
 
-#recentSearchCity button:hover {
+.recentSearchCity button:hover {
     opacity: 1;
 }
 

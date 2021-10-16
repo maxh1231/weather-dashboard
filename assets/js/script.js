@@ -7,9 +7,16 @@
 var searchCityInput = document.getElementById("searchCityInput");
 var searchCityBtn = document.getElementById("searchCityBtn");
 
+var recentSearchCity = document.getElementById("recentSearchCity");
+var localStorageIndex = 0;
 
 
 
+
+
+
+
+// API Call on search button click
 searchCityBtn.addEventListener("click", function () {
 
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchCityInput.value}&limit=5&appid=16504850b1a264a95e1797ff5a4e056b`)
@@ -37,6 +44,25 @@ searchCityBtn.addEventListener("click", function () {
                 })
         })
 
+    recentSearches();
 })
+
+let recentSearches = function () {
+
+    var localStorageKey = searchCityInput.value;
+    if (localStorageIndex <= 4 && localStorage.getItem(localStorageKey) === null) {
+        localStorage.setItem(localStorageKey, searchCityInput.value);
+        var setBtn = document.createElement("button");
+        setBtn.classList.add("recentSearchCity");
+        recentSearchCity.appendChild(setBtn);
+        setBtn.textContent = localStorage.getItem(localStorageKey);
+        console.log(localStorageIndex);
+        localStorageIndex++;
+    }
+
+}
+
+
+
 
 
