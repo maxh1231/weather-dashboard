@@ -195,3 +195,8 @@ header {
 button:hover {
     cursor: pointer;
 }
+
+.weeklyForecastImages {
+    width: 60px;
+    height: 60px;
+}
