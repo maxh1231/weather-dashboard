@@ -62,6 +62,15 @@ let searchCityBtnHandler = function () {
                     document.getElementById("cityHumidity").textContent = "Humidity: " + data.current.humidity + " %";
                     document.getElementById("cityUvIndex").textContent = "UV Index: " + data.current.uvi;
 
+                    var uvIndexColor = document.getElementById("cityUvIndex");
+                    if (data.current.uvi > 2) {
+                        uvIndexColor.classList.add("severe");
+                    } else if (data.current.uvi > 1 && data.current.uvi < 2) {
+                        uvIndexColor.classList.add("moderate");
+                    } else if (data.current.uvi < 1) {
+                        uvIndexColor.classList.add("favorable");
+                    }
+
 
 
                     var localStorageKey = searchCityInput.value;

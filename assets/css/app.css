@@ -200,3 +200,15 @@ button:hover {
     width: 60px;
     height: 60px;
 }
+
+.favorable {
+    color: green;
+}
+
+.moderate {
+    color: yellow;
+}
+
+.severe {
+    color: red;
+}
