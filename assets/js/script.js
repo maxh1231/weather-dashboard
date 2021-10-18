@@ -57,6 +57,9 @@ let searchCityBtnHandler = function () {
                 .then(function (data) {
                     console.log(data);
                     document.getElementById("cityNameDate").textContent = cityName + " " + moment().format("(M/DD/YYYY)");
+
+                    var cityNameDateImage = document.getElementById("cityNameDateImage");
+                    cityNameDateImage.src = "http://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png";
                     document.getElementById("cityTemp").textContent = "Temp: " + data.current.temp + "\u00B0" + "F";
                     document.getElementById("cityWind").textContent = "Wind: " + data.current.wind_speed + " MPH";
                     document.getElementById("cityHumidity").textContent = "Humidity: " + data.current.humidity + " %";
