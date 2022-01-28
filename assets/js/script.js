@@ -41,7 +41,7 @@ clearHistoryBtn.addEventListener("click", function () {
 // API Call on search button click
 let searchCityBtnHandler = function () {
 
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchCityInput.value}&limit=5&appid=16504850b1a264a95e1797ff5a4e056b`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchCityInput.value}&limit=5&appid=16504850b1a264a95e1797ff5a4e056b`)
 
         .then(response => response.json())
         .then(function (data) {
